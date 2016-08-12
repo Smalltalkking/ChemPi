@@ -1,12 +1,16 @@
 #!/usr/bin/python
 #Imports:
 import datetime
+import time
 
 #Config:
-#HTML location:
+	#Reporting interval
+ReportingInterval = 300
+
+	#HTML location:
 HTMLLocation = "/home/tobias/workspace/ChemPi/"
 
-#Temperature File name:
+	#Temperature File name:
 TempeFN="Temperature.csv"
 
 def TemperatureMeasure():
@@ -15,7 +19,7 @@ def TemperatureMeasure():
 	return Temp_Return
 
 
-#pH File name:
+	#pH File name:
 pHFN="pH.csv"
 
 def pHMeasure():
@@ -23,7 +27,7 @@ def pHMeasure():
 	pH_Return = MeasureTime.strftime('%H:%M:%S::%m/%d %Y') + ", Test - pH is measured, \n"
 	return pH_Return
 
-#Oxygen File name:
+	#Oxygen File name:
 OxygenFN="Oxygen.csv"
 
 def OMeasure():
@@ -31,7 +35,7 @@ def OMeasure():
 	O_Return = MeasureTime.strftime('%H:%M:%S::%m/%d %Y') + ", Test - O is measured, \n"
 	return O_Return
 
-#CO2 File name:
+	#CO2 File name:
 COTwoFN="COTwo.csv"
 
 def COTwoMeasure():
@@ -39,15 +43,16 @@ def COTwoMeasure():
 	COTwo_Return = MeasureTime.strftime('%H:%M:%S::%m/%d %Y') + ", Test - CO2 is measured, \n"
 	return COTwo_Return
 
+while True:
+	with open(HTMLLocation+TempeFN, "a") as myfile:
+    		myfile.write(TemperatureMeasure())
 
-with open(HTMLLocation+TempeFN, "a") as myfile:
-    myfile.write(TemperatureMeasure())
+	with open(HTMLLocation+pHFN, "a") as myfile:
+    		myfile.write(pHMeasure())
 
-with open(HTMLLocation+pHFN, "a") as myfile:
-    myfile.write(pHMeasure())
+	with open(HTMLLocation+OxygenFN, "a") as myfile:
+    		myfile.write(OMeasure())
 
-with open(HTMLLocation+OxygenFN, "a") as myfile:
-    myfile.write(OMeasure())
-
-with open(HTMLLocation+COTwoFN, "a") as myfile:
-    myfile.write(COTwoMeasure())
+	with open(HTMLLocation+COTwoFN, "a") as myfile:
+    		myfile.write(COTwoMeasure())
+	time.sleep(ReportingInterval)
