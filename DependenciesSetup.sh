@@ -3,6 +3,6 @@
 #python and php, so it should be easy to setup on different environments, and even different units, 
 #like intel based computers, and running parts on arduino, etc.
 
-sudo apt-get install pip3 
+sudo apt-get install pip3 apache2 php mariadb-server
 
 sudo pip3 apt-get install
