@@ -14,10 +14,10 @@ device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 #Config:
 	#Reporting interval
-ReportingInterval = 300
+ReportingInterval = 3
 
 	#HTML location:
-HTMLLocation = "/home/tobias/workspace/ChemPi/"
+HTMLLocation = "/var/www/html/"
 
 #Temperature
 	#Temperature File name:
@@ -43,7 +43,7 @@ def read_temp():
 
 def TemperatureMeasure():
 	MeasureTime = datetime.datetime.now()	
-	Temp_Return = MeasureTime.strftime('%H:%M:%S::%m/%d %Y') + ", " + read_temp() + "\n"
+	Temp_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", " + str(read_temp()) + ",\n"
 	return Temp_Return
 
 #pH
@@ -52,7 +52,7 @@ pHFN="pH.csv"
 
 def pHMeasure():
 	MeasureTime = datetime.datetime.now()	
-	pH_Return = MeasureTime.strftime('%H:%M:%S::%m/%d %Y') + ", Test - pH is measured, \n"
+	pH_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", Test - pH is measured, \n"
 	return pH_Return
 
 #Oxygen
@@ -61,7 +61,7 @@ OxygenFN="Oxygen.csv"
 
 def OMeasure():
 	MeasureTime = datetime.datetime.now()	
-	O_Return = MeasureTime.strftime('%H:%M:%S::%m/%d %Y') + ", Test - O is measured, \n"
+	O_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", Test - O is measured, \n"
 	return O_Return
 
 	#CO2 File name:
@@ -70,7 +70,7 @@ COTwoFN="COTwo.csv"
 #Carbon Dioxide
 def COTwoMeasure():
 	MeasureTime = datetime.datetime.now()	
-	COTwo_Return = MeasureTime.strftime('%H:%M:%S::%m/%d %Y') + ", Test - CO2 is measured, \n"
+	COTwo_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", Test - CO2 is measured, \n"
 	return COTwo_Return
 
 while True:
