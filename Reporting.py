@@ -5,6 +5,13 @@ import time
 import os
 import glob
 import time
+import RPi.GPIO as GPIO
+GPIO.setwarnings(False)
+
+DEBUG = 1
+GPIO.setmode(GPIO.BCM)
+
+
 #initialize the device 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
@@ -12,6 +19,8 @@ os.system('modprobe w1-therm')
 base_dir = '/sys/bus/w1/devices/'
 device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
+
+
 #Config:
 	#Reporting interval
 ReportingInterval = 3
@@ -64,14 +73,38 @@ def OMeasure():
 	O_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", Test - O is measured, \n"
 	return O_Return
 
+
+#Carbon Dioxide
 	#CO2 File name:
 COTwoFN="COTwo.csv"
 
-#Carbon Dioxide
+
 def COTwoMeasure():
 	MeasureTime = datetime.datetime.now()	
 	COTwo_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", Test - CO2 is measured, \n"
 	return COTwo_Return
+
+#Light measure
+        #Light File name:
+LightFN="Light.csv"
+
+def RCtime (RCpin):
+        reading = 0
+        GPIO.setup(RCpin, GPIO.OUT)
+        GPIO.output(RCpin, GPIO.LOW)
+        time.sleep(.1)
+ 
+        GPIO.setup(RCpin, GPIO.IN)
+        # This takes about 1 millisecond per loop cycle
+        while (GPIO.input(RCpin) == GPIO.LOW):
+                reading += 1
+        return reading
+
+def LightMeasure():
+	MeasureTime = datetime.datetime.now()	
+	Light_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", " + str(RCtime(3)) + ",\n"
+	return Light_Return
+
 
 while True:
 	with open(HTMLLocation+TempeFN, "a") as myfile:
@@ -85,4 +118,9 @@ while True:
 
 	with open(HTMLLocation+COTwoFN, "a") as myfile:
     		myfile.write(COTwoMeasure())
-	time.sleep(ReportingInterval)
+
+        with open(HTMLLocation+LightFN, "a") as myfile:
+                myfile.write(LightMeasure())
+
+
+        time.sleep(ReportingInterval)
