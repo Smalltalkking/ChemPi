@@ -5,14 +5,14 @@ import time
 import os
 import glob
 import time
+import ConfigParser
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 
 DEBUG = 1
 GPIO.setmode(GPIO.BCM)
 
-
-#initialize the device 
+#initialize the thermometer 
 os.system('modprobe w1-gpio')
 os.system('modprobe w1-therm')
 
@@ -24,6 +24,13 @@ device_file = device_folder + '/w1_slave'
 #Config:
 	#Reporting interval
 ReportingInterval = 3
+#Read config file
+
+config = ConfigParser.ConfigParser()
+config.read("html/config.txt")
+var_a = config.get("GPIOConfig", "var_a")
+var_b = config.get("GPIOConfig", "var_b")
+var_c = config.get("GPIOConfig", "var_c")
 
 	#HTML location:
 HTMLLocation = "/var/www/html/"
