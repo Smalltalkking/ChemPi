@@ -24,6 +24,9 @@ device_file = device_folder + '/w1_slave'
 #Config:
 	#Reporting interval
 ReportingInterval = 3
+	#Camera interval (3600=1 hour)
+CameraInterval = 3600
+
 #Read config file
 
 config = ConfigParser.ConfigParser()
