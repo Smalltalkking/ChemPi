@@ -21,18 +21,19 @@ git clone --recursive https://github.com/TobiasFP/ChemPi.git
 
 #Create symlink to html folder
 sudo rm -R /var/www/html
-ln -s ~/workspace/chempi/chempi/html/ /var/www/html/
+sudo ln -s  ~/workspace/chempi/ChemPi/html/ /var/www/
+
 
 #setup permissions, but please keep in mind that this is not written to be secure just yet.
 sudo chmod u=rwX,g=srX,o=rX -R /var/www/
-sudo chmod u=rwX,g=srX,o=rX -R ~/workspace/chempi/chempi/html/
+sudo chmod u=rwX,g=srX,o=rX -R ~/workspace/chempi/ChemPi/html/
 
 #Big Algae dependencies and installation
 echo "Do you want Big Algae?, (y/n) + [ENTER]:"
 
-read BigAlgae
-
-if ("$BigAlgae" == "y" ); then
+read  answer
+if ( [ "$answer" =  'y' ]  ||  ["$answer" = 'Y' ]);
+then
     sudo apt-get install python-opencv libcv-dev python-matplotlib python-scipy python-numpy
     sudo pip install piexif GPy  
     git clone --recursive https://github.com/Big-Algae-Open-Experiment/computational_writeup.git
