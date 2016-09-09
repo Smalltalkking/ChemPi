@@ -15,7 +15,8 @@ mkdir chempi
 cd chempi
 
 #Standard install without Big Algae
-sudo apt-get install apache2 php mariadb-server git 
+sudo apt-get install apache2 php mariadb-server git python-pip 
+sudo pip install picamera
 git clone --recursive https://github.com/TobiasFP/ChemPi.git
 
 #Create symlink to html folder
@@ -32,7 +33,7 @@ echo "Do you want Big Algae?, (y/n) + [ENTER]:"
 read BigAlgae
 
 if ("$BigAlgae" == "y" ); then
-    sudo apt-get install python-opencv libcv-dev python-matplotlib python-scipy python-numpy python-pip
+    sudo apt-get install python-opencv libcv-dev python-matplotlib python-scipy python-numpy
     sudo pip install piexif GPy  
     git clone --recursive https://github.com/Big-Algae-Open-Experiment/computational_writeup.git
     git clone --recursive https://github.com/Big-Algae-Open-Experiment/bigalgae.git
