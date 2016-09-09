@@ -37,6 +37,8 @@ if ("$BigAlgae" == "y" ); then
     sudo pip install piexif GPy  
     git clone --recursive https://github.com/Big-Algae-Open-Experiment/computational_writeup.git
     git clone --recursive https://github.com/Big-Algae-Open-Experiment/bigalgae.git
+    echo "Installer finished, installing Big Algae"
+
 else
   echo "Installer finished, without installing Big Algae"
 fi
