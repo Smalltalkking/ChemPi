@@ -16,7 +16,7 @@ $Interval = $_POST["Interval"];
 // Open the file 
 $file = 'config.txt';
 $configText = 
-"Temperature = " . $_POST["Temperature"] . "\n" . "TempGPIO = " . $_POST["TempGPIO"] .
+"Temperature = "[Config] \n" . $_POST["Temperature"] . "\n" . "TempGPIO = " . $_POST["TempGPIO"] .
 "\n" . "Light = " . $_POST["Light"] . "\n" . "LightGPIO = " . $_POST["LightGPIO"] . 
 "\n" . "pH = " . $_POST["pH"] . "\n" . "pHGPIO = " . $_POST["pHGPIO"] . 
 "\n" . "CarbonDioxide = " . $_POST["CarbonDioxide"] . "\n" . "CarbonDioxideGPIO = " . $_POST["CarbonDioxideGPIO"] . 
