@@ -30,18 +30,17 @@ sudo chmod u=rwX,g=srX,o=rX -R ~/workspace/chempi/chempi/html/
 #Big Algae dependencies and installation
 echo "Do you want Big Algae?, (y/n) + [ENTER]:"
 
-read BigAlgae
-
-if ("$BigAlgae" == "y" ); then
+read  answer
+if ( [ "$answer" =  'y' ]  ||  ["$answer" = 'Y' ]); then
+	{
     sudo apt-get install python-opencv libcv-dev python-matplotlib python-scipy python-numpy
     sudo pip install piexif GPy  
     git clone --recursive https://github.com/Big-Algae-Open-Experiment/computational_writeup.git
     git clone --recursive https://github.com/Big-Algae-Open-Experiment/bigalgae.git
     echo "Installer finished, installing Big Algae"
-
-else
-  echo "Installer finished, without installing Big Algae"
-fi
-
-
-
+	}
+	else
+		{
+			echo "Installer finished, without installing Big Algae"
+		}
+	fi
