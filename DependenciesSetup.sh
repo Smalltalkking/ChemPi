@@ -21,7 +21,7 @@ git clone --recursive https://github.com/TobiasFP/ChemPi.git
 
 #Create symlink to html folder
 sudo rm -R /var/www/html
-ln -s ~/workspace/chempi/chempi/html/ /var/www/html/
+sudo ln -s ~/workspace/chempi/chempi/html/ /var/www/html
 
 #setup permissions, but please keep in mind that this is not written to be secure just yet.
 sudo chmod u=rwX,g=srX,o=rX -R /var/www/
