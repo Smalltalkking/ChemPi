@@ -43,6 +43,8 @@ Light
     {}          // options
   );
 </script>
-
+<?php
+include 'WebConfig.php';
+?>
 </body>
 </html>
