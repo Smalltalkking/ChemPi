@@ -15,25 +15,24 @@ mkdir chempi
 cd chempi
 
 #Standard install without Big Algae
-sudo apt-get install apache2 php mariadb-server git python-pip libapache2-mod-php7.0 
+sudo apt-get install apache2 php mariadb-server git python-pip 
 sudo pip install picamera
 git clone --recursive https://github.com/TobiasFP/ChemPi.git
 
 #Create symlink to html folder
 sudo rm -R /var/www/html
-sudo ln -s  ~/workspace/chempi/ChemPi/html/ /var/www/
-
+ln -s ~/workspace/chempi/chempi/html/ /var/www/html/
 
 #setup permissions, but please keep in mind that this is not written to be secure just yet.
 sudo chmod u=rwX,g=srX,o=rX -R /var/www/
-sudo chmod u=rwX,g=srX,o=rX -R ~/workspace/chempi/ChemPi/html/
+sudo chmod u=rwX,g=srX,o=rX -R ~/workspace/chempi/chempi/html/
 
 #Big Algae dependencies and installation
 echo "Do you want Big Algae?, (y/n) + [ENTER]:"
 
-read  answer
-if ( [ "$answer" =  'y' ]  ||  ["$answer" = 'Y' ]);
-then
+read BigAlgae
+
+if ("$BigAlgae" == "y" ); then
     sudo apt-get install python-opencv libcv-dev python-matplotlib python-scipy python-numpy
     sudo pip install piexif GPy  
     git clone --recursive https://github.com/Big-Algae-Open-Experiment/computational_writeup.git
@@ -43,7 +42,6 @@ then
 else
   echo "Installer finished, without installing Big Algae"
 fi
-
 
 
 
