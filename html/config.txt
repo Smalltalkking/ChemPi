@@ -1,0 +1,13 @@
+Temperature = on
+TempGPIO = 3
+Light = on
+LightGPIO = 21
+pH = on
+pHGPIO = 27
+CarbonDioxide = 
+CarbonDioxideGPIO = 3
+Oxygen = 
+OxygenGPIO = 3
+PiCam = on
+CamRepInterval = 3600
+Interval = 3
