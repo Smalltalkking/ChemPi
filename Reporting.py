@@ -29,11 +29,11 @@ CameraInterval = 3600
 
 #Read config file
 
-config = ConfigParser.ConfigParser()
-config.read("html/config.txt")
-var_a = config.get("GPIOConfig", "var_a")
-var_b = config.get("GPIOConfig", "var_b")
-var_c = config.get("GPIOConfig", "var_c")
+#config = ConfigParser.ConfigParser()
+#config.read("html/config.txt")
+#var_a = config.get("GPIOConfig", "var_a")
+#var_b = config.get("GPIOConfig", "var_b")
+#var_c = config.get("GPIOConfig", "var_c")
 
 	#HTML location:
 HTMLLocation = "/var/www/html/"
