@@ -4,8 +4,8 @@ import datetime
 import time
 import os
 import glob
-import time
-import ConfigParser
+import configparser
+import picamera
 import RPi.GPIO as GPIO
 GPIO.setwarnings(False)
 
@@ -26,14 +26,26 @@ device_file = device_folder + '/w1_slave'
 ReportingInterval = 3
 	#Camera interval (3600=1 hour)
 CameraInterval = 3600
-
+CamLocation = '/home/chempi/workspace/chempi/computational_writeup/uploaded_images/'
+camera = picamera.PiCamera()
 #Read config file
 
-#config = ConfigParser.ConfigParser()
-#config.read("html/config.txt")
-#var_a = config.get("GPIOConfig", "var_a")
-#var_b = config.get("GPIOConfig", "var_b")
-#var_c = config.get("GPIOConfig", "var_c")
+config = configparser.ConfigParser()
+config.read('html/config.txt')
+ConfTemperature = config['Config']['Temperature']
+ConfTempGPIO = config['Config']['TempGPIO']
+ConfLight = config['Config']['Light']
+ConfLightGPIO = config['Config']['LightGPIO']
+
+ConfpH = config['Config']['pH']
+ConfpHGPIO = config['Config']['pHGPIO']
+ConfCarbonDioxide = config['Config']['CarbonDioxide']
+ConfCarbonDioxideGPIO = config['Config']['CarbonDioxideGPIO']
+ConfOxygen = config['Config']['Oxygen']
+ConfOxygenGPIO = config['Config']['OxygenGPIO']
+ConfPiCam = config['Config']['PiCam']
+ConfInterval = config['Config']['Interval']
+print(ConfLightGPIO)
 
 	#HTML location:
 HTMLLocation = "/var/www/html/"
@@ -61,8 +73,8 @@ def read_temp():
         return temp_c
 
 def TemperatureMeasure():
-	MeasureTime = datetime.datetime.now()	
-	Temp_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", " + str(read_temp()) + ",\n"
+	MeasureTime = time.time()	
+	Temp_Return = str(MeasureTime) + ", " + str(read_temp()) + ",\n"
 	return Temp_Return
 
 #pH
@@ -70,8 +82,8 @@ def TemperatureMeasure():
 pHFN="pH.csv"
 
 def pHMeasure():
-	MeasureTime = datetime.datetime.now()	
-	pH_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", Test - pH is measured, \n"
+	MeasureTime = time.time()	
+	pH_Return = str(MeasureTime) + ", Test - pH is measured, \n"
 	return pH_Return
 
 #Oxygen
@@ -79,8 +91,8 @@ def pHMeasure():
 OxygenFN="Oxygen.csv"
 
 def OMeasure():
-	MeasureTime = datetime.datetime.now()	
-	O_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", Test - O is measured, \n"
+	MeasureTime = time.time()	
+	O_Return = str(MeasureTime) + ", Test - O is measured, \n"
 	return O_Return
 
 
@@ -90,8 +102,8 @@ COTwoFN="COTwo.csv"
 
 
 def COTwoMeasure():
-	MeasureTime = datetime.datetime.now()	
-	COTwo_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", Test - CO2 is measured, \n"
+	MeasureTime = time.time()	
+	COTwo_Return = str(MeasureTime) + ", Test - CO2 is measured, \n"
 	return COTwo_Return
 
 #Light measure
@@ -111,12 +123,25 @@ def RCtime (RCpin):
         return reading
 
 def LightMeasure():
-	MeasureTime = datetime.datetime.now()	
-	Light_Return = MeasureTime.strftime('%Y%m%d%H%M%S') + ", " + str(RCtime(3)) + ",\n"
+	MeasureTime = time.time()	
+	Light_Return = str(MeasureTime) + ", " + str(RCtime(3)) + ",\n"
 	return Light_Return
 
 
+def TakePic():
+	MeasureTime = time.time()	
+	camera.capture("%s%s.jpg" % (CamLocation, MeasureTime))
+	return 0
+
+lastInterval = 0
 while True:
+	if lastInterval>CameraInterval:
+		TakePic()
+		lastInterval=0
+	else:
+		lastInterval = lastInterval + ReportingInterval
+		
+
 	with open(HTMLLocation+TempeFN, "a") as myfile:
     		myfile.write(TemperatureMeasure())
 
