@@ -21,15 +21,11 @@ device_folder = glob.glob(base_dir + '28*')[0]
 device_file = device_folder + '/w1_slave'
 
 
-#Config:
-	#Reporting interval
-ReportingInterval = 3
-	#Camera interval (3600=1 hour)
-CameraInterval = 3600
+#Camera Config:
 CamLocation = '/home/chempi/workspace/chempi/ChemPi/html/Pictures'
 camera = picamera.PiCamera()
-#Read config file
 
+#Read config file
 config = configparser.ConfigParser()
 config.read('html/config.txt')
 ConfTemperature = config['Config']['Temperature']
@@ -45,6 +41,7 @@ ConfOxygen = config['Config']['Oxygen']
 ConfOxygenGPIO = config['Config']['OxygenGPIO']
 ConfPiCam = config['Config']['PiCam']
 ConfInterval = config['Config']['Interval']
+CamRepInterval = config['Config']['CamRepInterval']
 print(ConfLightGPIO)
 
 	#HTML location:
@@ -124,7 +121,7 @@ def RCtime (RCpin):
 
 def LightMeasure():
 	MeasureTime = time.time()	
-	Light_Return = str(MeasureTime) + ", " + str(RCtime(3)) + ",\n"
+	Light_Return = str(MeasureTime) + ", " + str(RCtime(ConfLightGPIO)) + ",\n"
 	return Light_Return
 
 
@@ -133,29 +130,37 @@ def TakePic():
 	camera.capture("%s%s.jpg" % (CamLocation, MeasureTime))
 	return 0
 
+#Define camera interval start
 lastInterval = 0
+
+#Infinite loop to keep monitoring
 while True:
-	if lastInterval>CameraInterval:
+	if lastInterval>CamRepInterval:
 		TakePic()
 		lastInterval=0
 	else:
 		lastInterval = lastInterval + ReportingInterval
 		
 
-	with open(HTMLLocation+TempeFN, "a") as myfile:
-    		myfile.write(TemperatureMeasure())
+	if ConfTemperature == "on":
+		with open(HTMLLocation+TempeFN, "a") as myfile:
+    			myfile.write(TemperatureMeasure())
+			
+	if ConfpH == "on":
+		with open(HTMLLocation+pHFN, "a") as myfile:
+    			myfile.write(pHMeasure())
 
-	with open(HTMLLocation+pHFN, "a") as myfile:
-    		myfile.write(pHMeasure())
+	if ConfOxygen == "on":
+		with open(HTMLLocation+OxygenFN, "a") as myfile:
+    			myfile.write(OMeasure())
+			
+	if ConfCarbonDioxide == "on":
+		with open(HTMLLocation+COTwoFN, "a") as myfile:
+    			myfile.write(COTwoMeasure())
+			
+	if ConfLight == "on":
+		with open(HTMLLocation+LightFN, "a") as myfile:
+			myfile.write(LightMeasure())
 
-	with open(HTMLLocation+OxygenFN, "a") as myfile:
-    		myfile.write(OMeasure())
 
-	with open(HTMLLocation+COTwoFN, "a") as myfile:
-    		myfile.write(COTwoMeasure())
-
-        with open(HTMLLocation+LightFN, "a") as myfile:
-                myfile.write(LightMeasure())
-
-
-        time.sleep(ReportingInterval)
+        time.sleep(ConfInterval)
