@@ -26,7 +26,7 @@ device_file = device_folder + '/w1_slave'
 ReportingInterval = 3
 	#Camera interval (3600=1 hour)
 CameraInterval = 3600
-CamLocation = '/home/chempi/workspace/chempi/computational_writeup/uploaded_images/'
+CamLocation = '/home/chempi/workspace/chempi/ChemPi/html/Pictures'
 camera = picamera.PiCamera()
 #Read config file
 
@@ -52,7 +52,7 @@ HTMLLocation = "/var/www/html/"
 
 #Temperature
 	#Temperature File name:
-TempeFN="Temperature.csv"
+TempeFN="csv/Temperature.csv"
 
 
 def read_temp_raw():
@@ -79,7 +79,7 @@ def TemperatureMeasure():
 
 #pH
 	#pH File name:
-pHFN="pH.csv"
+pHFN="csv/pH.csv"
 
 def pHMeasure():
 	MeasureTime = time.time()	
@@ -88,7 +88,7 @@ def pHMeasure():
 
 #Oxygen
 	#Oxygen File name:
-OxygenFN="Oxygen.csv"
+OxygenFN="csv/Oxygen.csv"
 
 def OMeasure():
 	MeasureTime = time.time()	
@@ -98,7 +98,7 @@ def OMeasure():
 
 #Carbon Dioxide
 	#CO2 File name:
-COTwoFN="COTwo.csv"
+COTwoFN="csv/COTwo.csv"
 
 
 def COTwoMeasure():
@@ -108,7 +108,7 @@ def COTwoMeasure():
 
 #Light measure
         #Light File name:
-LightFN="Light.csv"
+LightFN="csv/Light.csv"
 
 def RCtime (RCpin):
         reading = 0
