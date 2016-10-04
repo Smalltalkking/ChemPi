@@ -90,9 +90,9 @@ include 'WebConfig.php';
 <ul>
 <li><a href="">Home</a></li>
 <li><a href="">WebConfig</a></li>
-<li><a href="">Plots</a></li>
-<li><a href="">BigAlgae</a></li>
-<li><a href="">Photo comparing</a></li>
+<li><a href="/csv/">Export data</a></li>
+<li><a href="http://bigalgae.com/about">BigAlgae</a></li>
+<li><a href="/Pictures/">Pictures</a></li>
 </ul>
 		
 </div>
