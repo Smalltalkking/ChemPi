@@ -38,11 +38,11 @@
 <br /><br /><br />
 <!--Defines for graphs-->
 <script type="text/javascript">
-var Temperature = "Temperature.csv";
-var Light = "Light.csv";
-var pH = "pH.csv";
-var Oxygen = "Oxygen.csv";
-var Oxygen = "COTwo.csv";
+var Temperature = "csv/Temperature.csv";
+var Light = "csv/Light.csv";
+var pH = "csv/pH.csv";
+var Oxygen = "csv/Oxygen.csv";
+var Oxygen = "csv/COTwo.csv";
 </script>
 <!--End defines for graphs-->
 
