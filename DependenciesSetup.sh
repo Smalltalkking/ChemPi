@@ -27,8 +27,15 @@ sudo ln -s ~/workspace/chempi/ChemPi/html /var/www/html
 sudo chmod u=rwX,g=srX,o=rX -R /var/www/
 sudo chmod u=rwX,g=srX,o=rX -R ~/workspace/chempi/ChemPi/html/
 
+#Allow GPIO and camera to operate:
+sudo echo "dtoverlay=w1-gpio" >> /boot/config.txt
+sudo echo "start_x=1" >> /boot/config.txt
+
+
 #Big Algae dependencies and installation
-echo "Do you want Big Algae?, (y/n) + [ENTER]: \n Note: Big Algae will only work if you have at least 2GB of SWAP space. You probably dont."
+echo "Do you want Big Algae?, (y/n) + [ENTER]:" 
+echo "Note: Big Algae will only work if you have at least 2GB of SWAP space. You probably don´t."
+echo "...and the bigalgae website functions fine without this module. This is for own Big Algae install."
 
 read  answer
 if ( [ "$answer" =  'y' ]  ||  ["$answer" = 'Y' ]); then
@@ -42,5 +49,20 @@ if ( [ "$answer" =  'y' ]  ||  ["$answer" = 'Y' ]); then
 	else
 		{
 			echo "Installer finished, without installing Big Algae"
+		}
+	fi
+
+
+echo "Installation finished, do you want to reboot?, (y/n) + [ENTER]:" 
+echo "Note: Rebooting is needed in order for ChemPi to be used (GPIO is not operational yet)"
+
+read  answers
+if ( [ "$answers" =  'y' ]  ||  ["$answer" = 'Y' ]); then
+	{
+		sudo reboot
+	}
+	else
+		{
+			echo "Installer finished, you need to manually reboot with 'sudo reboot'"
 		}
 	fi
