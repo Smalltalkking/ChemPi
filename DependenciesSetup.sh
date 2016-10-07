@@ -15,7 +15,7 @@ mkdir chempi
 cd chempi
 
 #Standard install without Big Algae
-sudo apt-get install apache2 php mariadb-server git python-pip 
+sudo apt-get install apache2 php mariadb-server git python-pip libapache2-mod-php
 sudo pip install picamera configparser
 git clone --recursive https://github.com/TobiasFP/ChemPi.git
 
