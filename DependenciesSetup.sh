@@ -28,7 +28,7 @@ sudo chmod u=rwX,g=srX,o=rX -R /var/www/
 sudo chmod u=rwX,g=srX,o=rX -R ~/workspace/chempi/ChemPi/html/
 
 #Big Algae dependencies and installation
-echo "Do you want Big Algae?, (y/n) + [ENTER]:"
+echo "Do you want Big Algae?, (y/n) + [ENTER]: \n Note: Big Algae will only work if you have at least 2GB of SWAP space. You probably dont."
 
 read  answer
 if ( [ "$answer" =  'y' ]  ||  ["$answer" = 'Y' ]); then
