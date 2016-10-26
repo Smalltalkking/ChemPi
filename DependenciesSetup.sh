@@ -52,6 +52,21 @@ if ( [ "$answer" =  'y' ]  ||  ["$answer" = 'Y' ]); then
 		}
 	fi
 
+grep "start_x=1" /boot/config.txt
+if grep "start_x=1" /boot/config.txt
+then
+        exit
+else
+        sudo sed -i "s/start_x=0/start_x=1/g" /boot/config.txt
+fi
+
+grep "dtoverlay=w1-gpio" /boot/config.txt
+if grep "dtoverlay=w1-gpio" /boot/config.txt
+then
+        exit
+else
+        sudo echo -e "dtoverlay=w1-gpio" >> /boot/config.txt
+fi
 
 echo "Installation finished, do you want to reboot?, (y/n) + [ENTER]:" 
 echo "Note: Rebooting is needed in order for ChemPi to be used (GPIO is not operational yet)"
